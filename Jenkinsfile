@@ -21,7 +21,7 @@ pipeline{
                 }
             }
         }
-        stage{
+        stage("Archieving"){
             steps{
                 sh 'tar cf mdt.tar --exclude=.git* --exclude=www/css --exclude=www/js / '
             } 
