@@ -23,7 +23,7 @@ pipeline{
         }
         stage("Archieving"){
             steps{
-                sh 'tar cf mdt.tar --exclude=.git* --exclude=www/css --exclude=www/js . '
+                sh 'tar cf mdt.tar --exclude=.git* --exclude=www/css --exclude=www/js --exclude=mdt.tar . '
             } 
         }
     }
