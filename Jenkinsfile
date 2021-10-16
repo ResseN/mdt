@@ -8,14 +8,14 @@ pipeline{
                 stage("JS"){
                     steps{
                         nodejs(nodeJSInstallationName: 'NodeJS16'){
-                            sh 'uglifyjs www/js/*.js -o www/min/*.minimized.js'
+                            sh 'find www/js/ -name "*.js" -print | xargs uglifyjs {} -o www/min/minimized.{}'
                         }
                     }
                 }
                 stage("CSS"){
                     steps{
                         nodejs(nodeJSInstallationName: 'NodeJS16'){
-                            sh 'cleancss -O2 www/css/*.css -o www/min/*.minimized.css'
+                            sh 'cleancss --batch --batch-suffix '.mini' www/css/*.css  -o www/min/*.'
                         }
                     }
                 }
