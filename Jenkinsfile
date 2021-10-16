@@ -5,17 +5,17 @@ pipeline{
     stages{
         stage("Compressing"){
             parallel{
-                stage("CleanCSS"){
+                stage("JS"){
                     steps{
                         nodejs(nodeJSInstallationName: 'NodeJS16'){
-                            sh 'cleancss -O 2 -o www/min/*.css www/css/*.css'
+                            sh 'uglifyjs www/js/*.js -o www/min/*.minimized.js'
                         }
                     }
                 }
-                stage("UglifyJS"){
+                stage("CSS"){
                     steps{
                         nodejs(nodeJSInstallationName: 'NodeJS16'){
-                            sh 'uglifyjs -o www/min/*.js www/js/*.js'
+                            sh 'cleancss -O2 www/css/*.css -o www/min/*.minimized.css'
                         }
                     }
                 }
