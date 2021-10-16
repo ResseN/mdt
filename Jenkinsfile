@@ -15,7 +15,7 @@ pipeline{
                 stage("CSS"){
                     steps{
                         nodejs(nodeJSInstallationName: 'NodeJS16'){
-                            sh 'cleancss --batch --batch-suffix \'.mini\' www/css/*.css  -o www/min/*.'
+                            sh 'find www/css/ -name "*.css" -printf \'%f\n\'| xargs -I {} cleancss www/css/{} -o www/min/{}'
                         }
                     }
                 }
