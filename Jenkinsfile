@@ -1,5 +1,5 @@
 pipeline{
-    agent node ubuntu_2004_agent
+    agent ubuntu_2004_agent
     stages{
         stage("Compressing"){
             parallel{
