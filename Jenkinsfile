@@ -8,7 +8,7 @@ pipeline{
                 stage("JS"){
                     steps{
                         nodejs(nodeJSInstallationName: 'NodeJS16'){
-                            sh 'find www/js/ -name "*.js" -print | xargs uglifyjs {} -o www/min/minimized.{}'
+                            sh 'find www/js/ -name "*.js" -printf '%f'| xargs uglifyjs {} -o www/min/minimized.{}'
                         }
                     }
                 }
