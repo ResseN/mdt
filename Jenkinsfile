@@ -36,7 +36,7 @@ pipeline{
                             "files": [
                                 {
                                 "pattern": "mdt.tar",
-                                "target": "general-repo-local/mdt.v.${BUILD_ID}.tar"
+                                "target": "general-repo-local/${BRANCH_NAME}/mdt.v.${BUILD_NUMBER}.tar"
                                 }
                             ]
                         }'''
