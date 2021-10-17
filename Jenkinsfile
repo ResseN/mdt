@@ -1,7 +1,6 @@
 node ("ubuntu_2004_agent") {
-    def compressing = ["JS" :{stage("JS") nodejs('NodeJS16'){sh 'find www/js/ -name "*.js" -printf \'%f\n\'| xargs -I {} uglifyjs www/js/{} -o www/min/min.{}'}},
-                      "CSS" :{stage("CSS") nodejs('NodeJS16'){sh 'find www/css/ -name "*.css" -printf \'%f\n\'| xargs -I {} cleancss www/css/{} -o www/min/min.{}'}}]
-    parallel compressing
+    parallel JS: nodejs('NodeJS16'){sh 'find www/js/ -name "*.js" -printf \'%f\n\'| xargs -I {} uglifyjs www/js/{} -o www/min/min.{}'},
+             CSS: nodejs('NodeJS16'){sh 'find www/css/ -name "*.css" -printf \'%f\n\'| xargs -I {} cleancss www/css/{} -o www/min/min.{}'}
     stage("Archieving") {
         sh 'tar cf mdt.tar --exclude=.git* --exclude=www/css --exclude=www/js --exclude=mdt.tar . '
         archiveArtifacts artifacts: 'mdt.tar', allowEmptyArchive: false, fingerprint: true, onlyIfSuccessful: true
