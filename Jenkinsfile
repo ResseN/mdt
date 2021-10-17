@@ -27,5 +27,21 @@ pipeline{
                 archiveArtifacts artifacts: 'mdt.tar', allowEmptyArchive: false, fingerprint: true, onlyIfSuccessful: true
             } 
         }
+        stage("Publication"){
+            steps{
+                rtUpload (
+                    serverId: 'Artifactory_week_ass',
+                    spec:
+                        '''{
+                            "files": [
+                                {
+                                "pattern": "mdt.tar",
+                                "target": "general-repo-local/${BRANCH_NAME}/mdt.v.${BUILD_NUMBER}.tar"
+                                }
+                            ]
+                        }'''
+                    )
+            }
+        }
     }
 }
