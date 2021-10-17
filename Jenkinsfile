@@ -24,6 +24,7 @@ pipeline{
         stage("Archieving"){
             steps{
                 sh 'tar cf mdt.tar --exclude=.git* --exclude=www/css --exclude=www/js --exclude=mdt.tar . '
+                archiveArtifacts artifacts: 'mdt.tar', allowEmptyArchive: false, fingerprint: true, onlyIfSuccessful: true
             } 
         }
     }
